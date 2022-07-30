@@ -13,36 +13,36 @@ import { TbArrowAutofitWidth } from "react-icons/tb";
 function App() {
   const sitesRecord = data[0].properties;
 
-  const [sitesToDisplay, handleDisplaySites] = useState(sitesRecord)
+  const [sitesToDisplay, handleDisplaySites] = useState(sitesRecord);
 
   const [rentValue, setRent] = useState(7000);
 
   const [bhkValue, setBHK] = useState(2);
 
-  const [locationValue, setLocation] = useState('Chandigarh');
+  const [locationValue, setLocation] = useState("Chandigarh");
 
-  const [furnishingStatus, setFurnishing] = useState('Unfurnished');
+  const [furnishingStatus, setFurnishing] = useState();
 
   const handleSearch = (e, location, rentamount, sitebhk, furnish) => {
     e.preventDefault();
-    // console.log('search clicked', location, rentamount, sitebhk, furnish);
 
-    // console.log('before filter search');
-    let searchedSites = sitesRecord.filter(
-      (site) =>
-        site.city == location &&
-        site.rent <= rentamount &&
-        site.bhk <= sitebhk &&
-        site.furnishing == furnish
-    );
-    handleDisplaySites(searchedSites);
+    if (furnish !== undefined) {
+      let searchedSites = sitesRecord.filter(
+        (site) =>
+          site.city == location &&
+          site.rent <= rentamount &&
+          site.bhk == sitebhk &&
+          site.furnishing == furnish
+      );
+
+      handleDisplaySites(searchedSites);
+    }
   };
-
 
   return (
     <div className="w-full">
       {/* navbar */}
-      <div className="mx-2 p-2 bg-red-100 w-full flex items-center justify-around">
+      <div className="h-20 p-2 bg-red-100 w-full flex items-center justify-around">
         <div className="text-3xl font-bold">
           <a href="http://" target="_blank" rel="noopener noreferrer">
             Ashiyana.in
@@ -69,18 +69,12 @@ function App() {
               <option value="Noida">Noida</option>
             </select>
 
-            {/* <p> {locationValue}</p> */}
+            
 
             <div className="relative">
               <label className=" ml-6" htmlFor="rent">
                 Rent
               </label>
-
-              {/* after:content-['30k'] after:ml-0.5 after:text-red-500
-              after:text-[0.7rem] after:absolute after:top-4 after:right-3
-              before:content-['1.5k'] before:ml-0.5 before:text-red-500
-              before:text-[0.7rem] before:absolute before:top-4 before:left-15 */}
-
               <input
                 className="mx-3  w-28 cursor-pointer"
                 type="range"
@@ -114,10 +108,10 @@ function App() {
               onChange={(e) => setBHK(e.target.value)}
             />
 
-            <div className="mx-6 flex ">
-              <div className="cursor-pointer">
+            <div className="mx-6 flex relative ">
+              <div className={`cursor-pointer ${furnishingStatus===undefined ? ("after:content-['*_Select_a_furnishing_status'] after:ml-0.5 after:text-red-500 after:text-[0.7rem] after:absolute after:top-5 after:right-1"):"" }`}>
                 <input
-                  className="cursor-pointer"
+                  className="cursor-pointer "
                   type="radio"
                   name="furnishing"
                   id="Unfurnished"
@@ -155,12 +149,11 @@ function App() {
                   Furnished
                 </label>
               </div>
-              {/* <p>{furnishingStatus}</p> */}
             </div>
 
             <button
               type="submit"
-              className="mx-2 p-1 w-20 text-center  border-2 border-blue-400 rounded-full bg-sky-300 hover:bg-sky-500 hover:text-slate-100"
+              className="mx-2 p-1 w-20 text-center  border-2 border-blue-400 rounded-full bg-sky-300 hover:bg-sky-500 hover:text-slate-100 hover:scale-105 hover:transition"
               onClick={(e) =>
                 handleSearch(
                   e,
@@ -177,95 +170,93 @@ function App() {
         </div>
       </div>
 
-      <div className="mx-52 bg-yellow-300 flex flex-col items-start ">
-        <h1 className="my-8 mx-5 text-gray-600 font-semibold text-3xl ">
-          Properties to rent
+      <div className="mx-52 flex flex-col items-start ">
+        <h1 className="mt-12 mb-8 mx-5 text-gray-600 font-semibold text-3xl ">
+          Available to rent : <span className="mx-3 text-2xl font-normal text-slate-600 ">
+          {sitesToDisplay.length}{" "}{sitesToDisplay.length === 1 || sitesToDisplay.length === 0 ? "Property found." : "Properties found."}
+        </span>
         </h1>
+        
+
+        <hr className="w-full my-4 border-solid border-t-2 border-gray-300" />
 
         {/* <div className="bg-red-300 self-center"> */}
-          <div className="bg-green-300 flex flex-wrap">
-            {sitesToDisplay.map((site) => {
-              return (
-                // card
-                <div
-                  key={site.id}
-                  className=" w-80  mx-2 my-8 border-2 border-slate-300 rounded-md bg-white-200 flex-col drop-shadow-xl bg-white overflow-hidden"
-                >
-                  {/* card */}
-                  <div className="  h-50 ">
-                    <img
-                      className="w-full h-24 md:h-40 object-cover "
-                      src={site.image}
-                    />
+        <div className=" flex flex-wrap">
+          { sitesToDisplay.length !==0 ?(sitesToDisplay.map((site) => {
+            return (
+              // card
+              <div
+                key={site.id}
+                className=" w-80  mx-2 my-8 border-2 border-slate-300 rounded-md bg-white-200 flex-col drop-shadow-xl bg-white overflow-hidden hover:cursor-pointer hover:scale-95 hover:transition  hover:drop-shadow-2xl hover:drop-shadow-[0_35px_35px_rgba(242, 150, 143,1)]"
+              >
+                {/* card */}
+                <div className="h-50">
+                  <img
+                    className="w-full h-24 md:h-40 object-cover "
+                    src={site.image}
+                  />
 
-                    <div className="m-1  ">
-                      {/* Details */}
-                      <div className="mx-5 my-3">
-                        <h1>
-                          <span className="text-gray-700 font-semibold">
-                            ₹ {site.rent}
-                          </span>{" "}
-                          <span className="text-xs">/month</span>
-                        </h1>
-                        <h1 className="font-bold inline text-lg text-purple-800">
-                          {site.name}
-                        </h1>
+                  <div className="m-1  ">
+                    {/* Details */}
+                    <div className="mx-5 my-3">
+                      <h1>
+                        <span className="text-gray-700 font-semibold">
+                          ₹ {site.rent}
+                        </span>{" "}
+                        <span className="text-xs">/month</span>
+                      </h1>
+                      <h1 className="font-bold inline text-lg text-purple-800">
+                        {site.name}
+                      </h1>
+                      <h1 className=" text-purple-700 font-mono text-base">
+                        {site.bhk} BHK {site.type}
+                      </h1>
 
-                        {/*  */}
-                        <p className="mx-7 inline text-3xl text-green-600 font-extrabold">
-                          {site.id}
-                        </p>
-                        {/*  */}
+                      <h1 className="text-sm text-slate-500">
+                        Owner: {site.owner}
+                      </h1>
+                      <h1 className="text-sm text-slate-500">
+                        <FaMapMarkerAlt className="inline h-3 mr-1 " />
+                        {site.city}, {site.state}
+                      </h1>
+                    </div>
 
-                        <h1 className=" text-purple-700 font-mono text-base">
-                          {site.bhk} BHK {site.type}
-                        </h1>
+                    {/* badges */}
+                    <div className="m-2 flex justify-around">
+                      <h1 className="badge">
+                        <MdChair className="inline mx-2" />
+                        {site.furnishing}
+                      </h1>
+                      <h1 className="badge">
+                        <TbArrowAutofitWidth className="inline mx-2" />
+                        {site.areasize} sq. feet{" "}
+                      </h1>
+                    </div>
 
-                        <h1 className="text-sm text-slate-500">
-                          Owner: {site.owner}
-                        </h1>
-                        <h1 className="text-sm text-slate-500">
-                          <FaMapMarkerAlt className="inline h-3 mr-1 " />
-                          {site.city}, {site.state}
-                        </h1>
+                    {/* aminites / Facilities awailable */}
+                    <div className="mb-8 pl-6 flex flex-wrap text-sm text-slate-400">
+                      <div className="w-1/2 ">
+                        <FaHandHoldingWater className="inline my-1 mx-2" />
+                        {site.Ammenities[0]}
                       </div>
-
-                      {/* badges */}
-                      <div className="m-2 flex justify-around">
-                        <h1 className="badge">
-                          <MdChair className="inline mx-2" />
-                          {site.furnishing}
-                        </h1>
-                        <h1 className="badge">
-                          <TbArrowAutofitWidth className="inline mx-2" />
-                          {site.areasize} sq. feet{" "}
-                        </h1>
+                      <div className="w-1/2 ">
+                        <FaWifi className="inline mx-2" />
+                        {site.Ammenities[1]}
                       </div>
-
-                      {/* aminites / Facilities awailable */}
-                      <div className="mb-8 pl-6 flex flex-wrap text-sm text-slate-400">
-                        <div className="w-1/2 ">
-                          <FaHandHoldingWater className="inline my-1 mx-2" />
-                          {site.Ammenities[0]}
-                        </div>
-                        <div className="w-1/2 ">
-                          <FaWifi className="inline mx-2" />
-                          {site.Ammenities[1]}
-                        </div>
-                        <div className="w-1/2 ">
-                          <FaFire className="inline mx-2" />
-                          {site.Ammenities[2]}
-                        </div>
-                        <div className="w-1/2 ">
-                          <FaTree className="inline mx-2" />
-                          {site.Ammenities[3]}
-                        </div>
+                      <div className="w-1/2 ">
+                        <FaFire className="inline mx-2" />
+                        {site.Ammenities[2]}
+                      </div>
+                      <div className="w-1/2 ">
+                        <FaTree className="inline mx-2" />
+                        {site.Ammenities[3]}
                       </div>
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })): <div className="my-6 ml-4 text-2xl text-slate-700 text-center">No property with requisite filters found. Please search for other filter inputs.</div> }
           {/* </div> */}
         </div>
       </div>
