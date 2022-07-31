@@ -20,7 +20,7 @@
             },
             {
                 "id": 2,
-                "name": "Anitlia",
+                "name": "Antilia",
                 "type":"Penthouse",
                 "rent": 25000,
                 "areasize": 600,
@@ -341,7 +341,7 @@
 
             {
                 "id": 23,
-                "name": "RamaKant Sastri",
+                "name": "Sastri Bhawan",
                 "type": "Flat",
                 "rent": 7000,
                 "areasize": 300,
@@ -418,25 +418,7 @@
                 ],
                 "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTe7HdgJeNEAQQx2cSgEhSnwuNRJNnrOy2Qw&usqp=CAU"
             },
-            {
-                "id": 30,
-                "name": "Prakash Bhawan",
-                "type": "Flat",
-                "rent": 6000,
-                "areasize": 200,
-                "owner": "Pooja Bhatt",
-                "bhk": 1,
-                "city": "Indore",
-                "state": "M.P.",
-                "furnishing": "Furnished",
-                "Ammenities": [
-                    "Water",
-                    "Wifi",
-                    "Gas",
-                    "Park"
-                ],
-                "image": "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2019/2/7/3/BP_HHMTN310_Bolden_home-exterior_AFTER_0132.jpg.rend.hgtvcom.966.644.suffix/1549585070420.jpeg"
-            },
+            
             
             {
                 "id": 27,
@@ -487,6 +469,26 @@
                 "city": "Mathura",
                 "state": "U.P.",
                 "furnishing": "Unfurnished",
+                "Ammenities": [
+                    "Water",
+                    "Wifi",
+                    "Gas",
+                    "Park"
+                ],
+                "image": "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2019/2/7/3/BP_HHMTN310_Bolden_home-exterior_AFTER_0132.jpg.rend.hgtvcom.966.644.suffix/1549585070420.jpeg"
+            },
+
+            {
+                "id": 30,
+                "name": "Prakash Bhawan",
+                "type": "Flat",
+                "rent": 6000,
+                "areasize": 200,
+                "owner": "Pooja Bhatt",
+                "bhk": 1,
+                "city": "Indore",
+                "state": "M.P.",
+                "furnishing": "Furnished",
                 "Ammenities": [
                     "Water",
                     "Wifi",
@@ -709,7 +711,7 @@
             },
             {
                 "id": 42,
-                "name": "Anitlia",
+                "name": "Antilia",
                 "type": "Penthouse",
                 "rent": 20000,
                 "areasize": 600,
@@ -763,8 +765,122 @@
                     "Park"
                 ],
                 "image": "https://img.staticmb.com/mbcontent/images/uploads/2022/5/Low%20cost%20single%20floor%20house%20with%20multiple%20sections.jpg"
-            }
+            },
 
+            {
+                "id": 43,
+                "name": "Prakash Bhawan",
+                "type": "Flat",
+                "rent": 15000,
+                "areasize": 200,
+                "owner": "Pooja Bhatt",
+                "bhk": 4,
+                "city": "Indore",
+                "state": "M.P.",
+                "furnishing": "Furnished",
+                "Ammenities": [
+                    "Water",
+                    "Wifi",
+                    "Gas",
+                    "Park"
+                ],
+                "image": "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2019/2/7/3/BP_HHMTN310_Bolden_home-exterior_AFTER_0132.jpg.rend.hgtvcom.966.644.suffix/1549585070420.jpeg"
+            },
+
+            {
+                "id": 44,
+                "name": "Vrindavanam",
+                "type": "Bungalow",
+                "rent": 10000,
+                "areasize": 200,
+                "owner": "Krishna Gopal",
+                "bhk": 4,
+                "city": "Indore",
+                "state": "M.P.",
+                "furnishing": "Unfurnished",
+                "Ammenities": [
+                    "Water",
+                    "Wifi",
+                    "Gas",
+                    "Park"
+                ],
+                "image": "https://img.staticmb.com/mbcontent//images/uploads/2022/5/10-bungalow-design-ideas.jpg"
+            },
+
+            {
+                "id": 45,
+                "name": "Gulistan",
+                "type": "Bungalow",
+                "rent": 16000,
+                "areasize": 300,
+                "owner": "Shah Alam",
+                "bhk": 4,
+                "city": "Indore",
+                "state": "M.P.",
+                "furnishing": "Semi-furnished",
+                "Ammenities": [
+                    "Water",
+                    "Wifi",
+                    "Gas",
+                    "Park"
+                ],
+                "image": "https://images.thrillophilia.com/image/upload/s--fZaNWEMY--/c_fill,h_600,q_auto,w_975/f_auto,fl_strip_profile/v1/images/photos/000/253/154/original/1588844344_unnamed_(5).jpg.jpg?1588844344"
+            },
+
+            {
+                "id": 46,
+                "name": "Galaxy",
+                "type":"Flat",
+                "rent": 12000,
+                "areasize": 200,
+                "owner": "Salman Khan",
+                "bhk": 4,
+                "city": "Mumbai",
+                "state": "Maharastra",
+                "furnishing":"Semi-furnished",
+                "Ammenities": ["Water","Wifi","Gas","Park"],
+                "image": "https://hips.hearstapps.com/hmg-prod/images/exterior-one-story-bungalow-at-pasadena-california-royalty-free-image-1577134660.jpg"
+
+            },
+            {
+                "id": 46,
+                "name": "Kutumbh",
+                "type": "Flat",
+                "rent": 1800,
+                "areasize": 100,
+                "owner": "Ganesh",
+                "bhk": 4,
+                "city": "Mumbai",
+                "state": "Maharastra",
+                "furnishing": "Unfurnished",
+                "Ammenities": [
+                    "Water",
+                    "Wifi",
+                    "Gas",
+                    "Park"
+                ],
+                "image": "https://r1imghtlak.mmtcdn.com/a0ce78a6021a11eab9d50242ac110005.jpg"
+            },
+
+            {
+                "id": 46,
+                "name": "Acharya Aawas",
+                "type": "Flat",
+                "rent": 19000,
+                "areasize": 300,
+                "owner": "Gangesh Acharaya",
+                "bhk": 4,
+                "city": "Mumbai",
+                "state": "Maharastra",
+                "furnishing": "Semi-furnished",
+                "Ammenities": [
+                    "Water",
+                    "Wifi",
+                    "Gas",
+                    "Park"
+                ],
+                "image": "https://images.adsttc.com/media/images/62a2/09ec/e939/c75a/dd8d/dbea/newsletter/a-home-leftover-ego-design-studio_11.jpg?1654786609"
+            }
 
            
         
