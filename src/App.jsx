@@ -50,7 +50,7 @@ function App() {
       {/* Header navbar */}
       <div className="px-24  p-2 bg-blue-100 w-full border-b-2 border-blue-200 flex flex-wrap items-center justify-evenly sm:justify-between">
         <div className="m-3 text-3xl italic text-indigo-700 text font-bold">
-          <a href="#" target="_parent" rel="">
+          <a href="" target="_parent" rel="">
             Aashiyana.in
           </a>
         </div>
