@@ -11,10 +11,14 @@ import { MdChair } from "react-icons/md";
 import { TbArrowAutofitWidth } from "react-icons/tb";
 
 function App() {
+
+  // property data from json file
   const sitesRecord = data[0].properties;
 
+  // hook to display property sites in DOM
   const [sitesToDisplay, handleDisplaySites] = useState(sitesRecord);
 
+  // Hooks for each filter
   const [rentValue, setRent] = useState(7000);
 
   const [bhkValue, setBHK] = useState(2);
@@ -23,6 +27,8 @@ function App() {
 
   const [furnishingStatus, setFurnishing] = useState();
 
+
+  // function to filter sites when clicked on Search button
   const handleSearch = (e, location, rentamount, sitebhk, furnish) => {
     e.preventDefault();
 
@@ -44,7 +50,7 @@ function App() {
       {/* Header navbar */}
       <div className="px-24  p-2 bg-blue-100 w-full border-b-2 border-blue-200 flex flex-wrap items-center justify-evenly sm:justify-between">
         <div className="m-3 text-3xl italic text-indigo-700 text font-bold">
-          <a href="/" target="_parent" rel="">
+          <a href="#" target="_parent" rel="">
             Aashiyana.in
           </a>
         </div>
