@@ -61,6 +61,7 @@ function App() {
           {/* search filters */}
           <div className=" mt-20 sm:h-40  md:h-24 lg:h-16 flex self-center lg:p-8 lg:flex-nowrap border-2 border-slate-200 rounded-md shadow-xl ring-slate-300 ">
             <form className="p-4 sm:p-0 flex flex-wrap md:flex-nowrap items-center" action="">
+              {/* location */}
               <div className="whitespace-nowrap">
                 <label className="mx-3 " htmlFor="location">
                   Location
@@ -81,6 +82,7 @@ function App() {
                 </select>
               </div>
 
+              {/* rent */}
               <div className="relative whitespace-nowrap">
                 <label className=" ml-6" htmlFor="rent">
                   Rent
@@ -103,6 +105,7 @@ function App() {
                 </span>
               </div>
 
+              {/* BHK */}
               <div className="whitespace-nowrap">
                 <label className="ml-6 " htmlFor="bhk">
                   BHK
@@ -120,6 +123,7 @@ function App() {
                 />
               </div>
 
+              {/* furnishing status */}
               <div className="ml-6 lg:mx-6 flex flex-wrap lg:flex-nowrap relative">
                 <div className={`mr-3 cursor-pointer whitespace-nowrap ${furnishingStatus === undefined ? ("after:content-['*_Select_a_furnishing_status'] after:ml-0.5 after:text-red-500 after:text-[0.7rem] after:absolute after:-bottom-3 lg:after:top-5  after:left-0 lg:after:right-1 ") : ""}`}>
                   <input
@@ -163,6 +167,7 @@ function App() {
                 </div>
               </div>
 
+              {/* search button */}
               <button
                 type="submit"
                 className="mx-2 px-2 mt-4 sm:mt-0 lg:p-1  w-20 text-center text-slate-100  border-2 border-indigo-500 rounded-full bg-indigo-500 hover:bg-indigo-600 hover:text-slate-100 hover:scale-105 hover:transition"
