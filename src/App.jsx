@@ -1,5 +1,4 @@
-// import logo from "./logo.svg";
-// import './App.css';
+
 import React, { useState } from "react";
 import data from "./realestateapi.json";
 import { FaTree } from "react-icons/fa";
@@ -123,7 +122,7 @@ function App() {
                   id="bhk"
                   steps="1"
                   min="1"
-                  max="6"
+                  max="4"
                   value={bhkValue}
                   onChange={(e) => setBHK(e.target.value)}
                 />
