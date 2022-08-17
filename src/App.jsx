@@ -70,7 +70,7 @@ function App() {
       <main className="flex justify-center">
         <div className="w-[95%] md:w-4/5 my-20 flex flex-col items-start gap-10">
           {/* search filters */}
-          <div className=" flex self-center p-4 lg:flex-nowrap border-2 border-slate-200 rounded-md shadow-xl ring-slate-300 ">
+          <div className=" flex self-center p-4 lg:flex-nowrap border-2 border-slate-200 rounded-md shadow-lg shadow-indigo-200/70 ">
             <form
               className="flex flex-col gap-5 justify-center md:flex-row md:flex-nowrap md:items-center text-sm lg:text-base "
               action=""
@@ -232,12 +232,12 @@ function App() {
                   // card
                   <div
                     key={site.id}
-                    className="w-[98%] md:w-[49%] lg:w-64 border-2 border-slate-300 rounded-md bg-white-200 flex flex-row lg:flex-col drop-shadow-xl bg-white overflow-hidden hover:cursor-pointer hover:scale-95 hover:transition  hover:drop-shadow-2xl hover:drop-shadow-[0_35px_35px_rgba(242, 150, 143,1)]"
+                    className="w-[98%] md:w-[49%] lg:w-64 border-2 border-slate-300 rounded-md bg-white-200 flex flex-row lg:flex-col drop-shadow-lg bg-white overflow-hidden hover:cursor-pointer hover:scale-[98%] hover:transition-all hover:shadow-lg hover:shadow-indigo-200  "
                   >
                     {/* card design*/}
                     {/* <div className="h-50"> */}
 
-                    <div className="w-2/5 h-full lg:w-full lg:h-40">
+                    <div className="w-2/5 h-full overflow-hidden lg:w-full lg:h-40">
                       <img
                         className="w-full h-full object-fill "
                         src={site.image}
@@ -319,6 +319,7 @@ function App() {
         </div>
       </main>
 
+      {/* footer contact */}
       <footer id="contact" className="contact flex justify-center bg-blue-100 text-indigo-600 border-t-2 border-blue-200" >
             <div className="py-8 flex flex-col items-center gap-2 ">
                 <ul className="flex gap-6 md:gap-16">
