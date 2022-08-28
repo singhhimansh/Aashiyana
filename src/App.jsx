@@ -1,53 +1,71 @@
-import React, { useState } from "react";
-import data from "./realestateapi.json";
+import React, { useState, useEffect } from "react";
+
 
 // react-icons
 import { FaTree, FaHandHoldingWater, FaWifi, FaFire, FaMapMarkerAlt, FaGithub, FaLinkedin, FaFacebook, FaGlobe } from "react-icons/fa";
 import { MdChair } from "react-icons/md";
 import { TbArrowAutofitWidth } from "react-icons/tb";
 import { GrUserManager, GrInstagram } from "react-icons/gr";
-import { SiLinktree } from "react-icons/si";
+
 
 
 
 function App() {
-  // property data from json file
-  const sitesRecord = data[0].properties;
+
 
   // hook to display property sites in DOM
-  const [sitesToDisplay, handleDisplaySites] = useState(sitesRecord);
+  const [sitesToDisplay, setDisplaySites] = useState([]);
+  const [sitesRecords, setSitesRecords] = useState([]);
 
-  // Hooks for each filter
-  const [rentValue, setRent] = useState(7000);
-
+  // Hooks for each filter and alert
+  const [rentValue, setRent] = useState(10000);
   const [bhkValue, setBHK] = useState(2);
-
   const [locationValue, setLocation] = useState("Chandigarh");
-
   const [furnishingStatus, setFurnishing] = useState();
 
-  // hook for alert message
-  const [ alert, setAlert] =useState (false);
+  const [alert, setAlert] = useState(false);
+
+
+  // fetch property sites from API
+  useEffect(() => {
+    (async () => {
+      const propApiData = await fetch('https://customapi.vercel.app/api/realestate.json').then((res) => res.json());
+
+      let sitesData = [...propApiData[0].properties];
+      // console.log(sitesRecord);
+      setDisplaySites(sitesData);
+      setSitesRecords(sitesData)
+    })();
+  }, []);
+
 
   // function to filter sites when clicked on Search button
-  const handleSearch = (e, location, rentamount, sitebhk, furnish) => {
+  const handleSearch = (e) => {
     e.preventDefault();
+    console.log('inside search', sitesRecords);
 
-    if (furnish !== undefined) {
+    console.log(locationValue, rentValue, bhkValue, furnishingStatus);
+    // console.log(sitesToDisplay);
+
+    if (furnishingStatus !== undefined) {
       setAlert(false);
-      let searchedSites = sitesRecord.filter(
+      let searchedSites = sitesRecords.filter(
         (site) =>
-          site.city == location &&
-          site.rent <= rentamount &&
-          site.bhk == sitebhk &&
-          site.furnishing == furnish
+        (site.city == locationValue &&
+          site.rent <= rentValue &&
+          site.bhk == bhkValue &&
+          site.furnishing == furnishingStatus)
       );
 
-      handleDisplaySites(searchedSites);
+      console.log('searched sites', searchedSites);
+      setDisplaySites(searchedSites);
+      // setDisplaySites(sitesdata);
+
     } else {
       setAlert(true);
     }
   };
+
 
   return (
     <div className="w-full">
@@ -140,11 +158,10 @@ function App() {
               {/* furnishing status */}
               <div className="flex md:flex-col lg:flex-row gap-4 md:gap-0  lg:gap-4 flex-nowrap relative">
                 <div
-                  className={`cursor-pointer whitespace-nowrap ${
-                    alert === true
+                  className={`cursor-pointer whitespace-nowrap ${alert === true
                       ? "after:content-['*_Select_a_furnishing_status'] after:ml-0.5 after:text-red-500 after:text-[0.6rem] after:absolute after:-bottom-4 lg:after:top-5  after:left-0 lg:after:right-1 "
                       : ""
-                  }`}
+                    }`}
                 >
                   <input
                     className="cursor-pointer "
@@ -195,13 +212,7 @@ function App() {
                 type="submit"
                 className="p-2 md:px-4 lg:p-1 self-center w-20 grow text-center text-slate-100  border-2 border-indigo-500 rounded-full bg-indigo-500 hover:bg-indigo-600 hover:text-slate-100 hover:scale-105 hover:transition"
                 onClick={(e) =>
-                  handleSearch(
-                    e,
-                    locationValue,
-                    rentValue,
-                    bhkValue,
-                    furnishingStatus
-                  )
+                  handleSearch(e)
                 }
               >
                 Search
@@ -211,7 +222,7 @@ function App() {
 
           {/* Properties counter */}
           <div className="w-full  mt-10 text-gray-600  ">
-           <span className="mx-3 font-semibold text-lg md:text-3xl"> Available to rent :</span>
+            <span className="mx-3 font-semibold text-lg md:text-3xl"> Available to rent :</span>
             <span className="text-base md:text-2xl font-normal text-slate-600 ">
               {sitesToDisplay.length}{" "}
               {sitesToDisplay.length === 1 || sitesToDisplay.length === 0
@@ -242,75 +253,75 @@ function App() {
                         className="w-full h-full object-fill "
                         src={site.image}
                       />
+                    </div>
+
+
+                    <div className="w-full pl-2 py-1 lg:p-3">
+                      {/* Details */}
+                      <h1>
+                        <span className="text-gray-700 text-xs lg:text-base font-semibold">
+                          ₹ {site.rent}
+                        </span>{" "}
+                        <span className="text-xs">/month</span>
+                      </h1>
+
+                      <div className=" flex items-center lg:items-start lg:flex-col gap-2 lg:gap-0  ">
+                        <h1 className="font-bold inline text-base lg:text-lg text-purple-800">
+                          {site.name}
+                        </h1>
+                        <h1 className=" text-purple-700 font-mono text-xs lg:text-base">
+                          {site.bhk} BHK {site.type}
+                        </h1>
                       </div>
-  
 
-                      <div className="w-full pl-2 py-1 lg:p-3">
-                        {/* Details */}
-                          <h1>
-                            <span className="text-gray-700 text-xs lg:text-base font-semibold">
-                              ₹ {site.rent}
-                            </span>{" "}
-                            <span className="text-xs">/month</span>
-                          </h1>
-                      
-                        <div className=" flex items-center lg:items-start lg:flex-col gap-2 lg:gap-0  ">
-                          <h1 className="font-bold inline text-base lg:text-lg text-purple-800">
-                            {site.name}
-                          </h1>
-                          <h1 className=" text-purple-700 font-mono text-xs lg:text-base">
-                            {site.bhk} BHK {site.type}
-                          </h1>
-                        </div>
+                      <div className=" text-slate-500 text-xs lg:text-sm flex items-center gap-2 lg:block ">
+                        <h1 className="">
+                          <GrUserManager className="inline h-[10px] " /> {site.owner}
+                        </h1>
+                        <h1 className="">
+                          <FaMapMarkerAlt className="inline  h-2 lg:h-3 mr-0.5 " />
+                          {site.city}, {site.state}
+                        </h1>
+                      </div>
 
-                        <div className=" text-slate-500 text-xs lg:text-sm flex items-center gap-2 lg:block ">
-                          <h1 className="">
-                            <GrUserManager className="inline h-[10px] "/> {site.owner}
-                          </h1>
-                          <h1 className="">
-                            <FaMapMarkerAlt className="inline  h-2 lg:h-3 mr-0.5 " />
-                            {site.city}, {site.state}
-                          </h1>
-                        </div>
+                      {/* badges */}
+                      <div className=" flex mx-1 gap-2 lg:m-0  lg:justify-between ">
+                        <h1 className="badge">
+                          <MdChair className="inline mr-0.5" />
+                          {site.furnishing}
+                        </h1>
+                        <h1 className="badge">
+                          <TbArrowAutofitWidth className="inline mr-0.5" />
+                          {site.areasize} sq. feet{" "}
+                        </h1>
+                      </div>
 
-                        {/* badges */}
-                        <div className=" flex mx-1 gap-2 lg:m-0  lg:justify-between ">
-                          <h1 className="badge">
-                            <MdChair className="inline mr-0.5" />
-                            {site.furnishing}
-                          </h1>
-                          <h1 className="badge">
-                            <TbArrowAutofitWidth className="inline mr-0.5" />
-                            {site.areasize} sq. feet{" "}
-                          </h1>
+                      {/* aminites / Facilities awailable */}
+                      <div className="my-1 flex flex-wrap gap-2 text-xs lg:text-sm text-slate-400">
+                        <div className="basis-1/2">
+                          <FaHandHoldingWater className="inline my-1 mx-2" />
+                          {site.Ammenities[0]}
                         </div>
-
-                        {/* aminites / Facilities awailable */}
-                        <div className="my-1 flex flex-wrap gap-2 text-xs lg:text-sm text-slate-400">
-                          <div className="basis-1/2">
-                            <FaHandHoldingWater className="inline my-1 mx-2" />
-                            {site.Ammenities[0]}
-                          </div>
-                          <div className="">
-                            <FaWifi className="inline mx-2" />
-                            {site.Ammenities[1]}
-                          </div>
-                          <div className="basis-1/2">
-                            <FaFire className="inline mx-2" />
-                            {site.Ammenities[2]}
-                          </div>
-                          <div className="">
-                            <FaTree className="inline mx-2" />
-                            {site.Ammenities[3]}
-                          </div>
+                        <div className="">
+                          <FaWifi className="inline mx-2" />
+                          {site.Ammenities[1]}
                         </div>
+                        <div className="basis-1/2">
+                          <FaFire className="inline mx-2" />
+                          {site.Ammenities[2]}
+                        </div>
+                        <div className="">
+                          <FaTree className="inline mx-2" />
+                          {site.Ammenities[3]}
+                        </div>
+                      </div>
                       {/* </div> */}
                     </div>
                   </div>
                 );
               })
             ) : (
-              <div className="my-6 ml-4 text-2xl text-slate-700 text-center">
+              <div className="ml-4 md:mb-24 text-base md:text-xl text-slate-700 text-center">
                 No property with requisite filters found. Please search for
                 other filter inputs.
               </div>
@@ -321,40 +332,40 @@ function App() {
 
       {/* footer contact */}
       <footer id="contact" className="contact flex justify-center bg-blue-100 text-indigo-600 border-t-2 border-blue-200" >
-            <div className="py-8 flex flex-col items-center gap-2 ">
-                <ul className="flex gap-6 md:gap-16">
+        <div className="py-8 flex flex-col items-center gap-2 ">
+          <ul className="flex gap-6 md:gap-16">
 
-                  <li title="Himanshu Personal website" className="hover:animate-bounce">
-                    <a href="https://www.himanshusingh.site/" target="_blank" className="">
-                      <FaGlobe className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150' /></a>
-                  </li>
+            <li title="Himanshu Personal website" className="hover:animate-bounce">
+              <a href="https://www.himanshusingh.site/" target="_blank" className="">
+                <FaGlobe className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150' /></a>
+            </li>
 
 
-                  <li title="github" className="hover:animate-bounce">
-                    <a href="https://github.com/singhhimansh/" target="_blank" className="">
-                      <FaGithub className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150'/></a>
-                  </li>
+            <li title="github" className="hover:animate-bounce">
+              <a href="https://github.com/singhhimansh/" target="_blank" className="">
+                <FaGithub className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150' /></a>
+            </li>
 
-                  <li title="linkedin" className="hover:animate-bounce">
-                    <a href="https://www.linkedin.com/in/singhhimansh/" target="_blank" className=""><FaLinkedin className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150'/> </a>
-                  </li>
+            <li title="linkedin" className="hover:animate-bounce">
+              <a href="https://www.linkedin.com/in/singhhimansh/" target="_blank" className=""><FaLinkedin className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150' /> </a>
+            </li>
 
-                  <li title="instagram" className="hover:animate-bounce">
-                    <a href="https://www.instagram.com/himanshhh_/" target="_blank" className="">
-                    <GrInstagram className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150'/></a>
-                  </li>
+            <li title="instagram" className="hover:animate-bounce">
+              <a href="https://www.instagram.com/himanshhh_/" target="_blank" className="">
+                <GrInstagram className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150' /></a>
+            </li>
 
-                  <li title="facebook" className="hover:animate-bounce">
-                    <a href="https://www.facebook.com/him.signum/" target="_blank" className=""><FaFacebook className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150' /></a>
-                  </li>                  
-                </ul>
-                
-                <div className="mt-3 w-full flex flex-nowrap gap-4 items-center opacity-50  ">
-                  <hr className='w-full h-px bg-indigo-600' />
-                 <a href="http://himanshusingh.site" target="_blank" rel="noopener noreferrer"><h1 className="text-xs font-mono uppercase tracking-widest whitespace-nowrap hover:text-indigo-600 hover:font-bold transition-all duration-200">Himanshu Singh</h1></a>
-                  <hr className='w-full h-px bg-indigo-600' />
-                </div>
-            </div>
+            <li title="facebook" className="hover:animate-bounce">
+              <a href="https://www.facebook.com/him.signum/" target="_blank" className=""><FaFacebook className='w-5 h-5 fill-indigo-600 hover:fill-indigo-500 hover:scale-150 transition-all duration-150' /></a>
+            </li>
+          </ul>
+
+          <div className="mt-3 w-full flex flex-nowrap gap-4 items-center opacity-50  ">
+            <hr className='w-full h-px bg-indigo-600' />
+            <a href="http://himanshusingh.site" target="_blank" rel="noopener noreferrer"><h1 className="text-xs font-mono uppercase tracking-widest whitespace-nowrap hover:text-indigo-600 hover:font-bold transition-all duration-200">Himanshu Singh</h1></a>
+            <hr className='w-full h-px bg-indigo-600' />
+          </div>
+        </div>
       </footer>
     </div>
   );

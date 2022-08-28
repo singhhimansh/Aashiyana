@@ -4,7 +4,7 @@
 #### A responsive website developed with React.js to seacrh for a proerty to rent using four different filters
 
 ## Tech Stack
- React.Js, TailwindCss
+ React.Js, TailwindCss, VS Code
 
 
 ## Features
@@ -17,12 +17,12 @@ Four filters used to search for a property:
 
 ## Screenshots
 
-Landing Page             
-:-------------------------:
-![](./public/Home.png) 
+Desktop                    | Mobile
+:-------------------------:|:-------------------------:
+![](./public/Home.png)      |![](./public/mobaashiyana.png) 
 
 
 ## Deployement Link 
-Visit: https://singhhimansh.github.io/Real_Estate/
+Visit: https://aashiyana.vercel.app/
 
 #### **_Developed by Himanshu Singh_**
